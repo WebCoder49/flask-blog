@@ -12,3 +12,5 @@ class Config:
     # Environment variables auto-fetched by flask when python-dotenv installed
     MAIL_USERNAME = os.environ.get('EMAIL_USER')
     MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+
+THE_KEY = os.environ.get('THE_KEY')

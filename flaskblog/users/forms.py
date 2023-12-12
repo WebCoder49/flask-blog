@@ -8,6 +8,11 @@ from flaskblog.models import User
 
 
 class RegistrationForm(FlaskForm):
+    the_key = StringField("The Key",
+                           validators=[
+                               DataRequired(),
+                               Length(min=2, max=20)
+                           ])
     username = StringField("Username",
                            validators=[
                                DataRequired(),

@@ -6,6 +6,8 @@ from flaskblog.models import User, Post
 from flaskblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
 from flaskblog.users.utils import delete_old_profile_picture, save_picture, send_reset_email
 
+from flaskblog.config import THE_KEY
+
 users = Blueprint("users", __name__)
 
 @users.route("/register", methods=["GET", "POST"])
@@ -14,7 +16,8 @@ def register():
         return redirect(url_for("main.home"))
     form = RegistrationForm()
 
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form.the_key.data == THE_KEY:
+        # THE_KEY is a secret string ensuring no strangers can create accounts
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
