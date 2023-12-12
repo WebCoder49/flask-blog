@@ -18,7 +18,6 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
 
-    print(hex(hash(i.tobytes())), str(hex(hash(i.tobytes()))), str(hex(hash(i.tobytes())))[3:])
     hash_hex = str(hex(hash(i.tobytes()))).replace("0x", "")  # Remove '0x', even if '-0x'
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = hash_hex + f_ext
